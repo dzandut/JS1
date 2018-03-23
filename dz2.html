@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Домашнее задание 2</title>
+</head>
+<body>
+<h1>Домашнее задание</h1>
+<h2>Задание 1</h2>
+<pre>
+    var a = 1, b = 1, c, d; - Присваевам 1 для a и b
+    c = ++a; alert(c); // 2 - Переменную а увеличиваем на 1 и присваеваем с
+    d = b++; alert(d); // 1 - Переменную b присваеваем d после этого увеличиваем на 1
+    c = (2+ ++a); alert(c); // 5 - 2+ (переменная а которая на этот момент равняется 2 и перед сложением увеличивается на 1)
+    d = (2+ b++); alert(d); // 4 - 2+ (переманная b=2 сначала складывается с 2 и только потом увеличивается на 1)
+    alert(a); // 3 - в 3й строке мы увеличили переменную а до 3
+    alert(b); // 3 - в 4й строке мы увеличили переменную b до 3
+</pre>
+<h2>Задание 2</h2>
+<pre>
+    var a = 2;
+    var x = 1 + (a *= 2); / x = 5
+</pre>
+<h2>Задание 3</h2>
+<script>
+    function calc(x,y) {
+        var result; // переменная для вывода
+        if(x>=0 && y>=0){ // Проверка что бы все были положительные
+            result = x - y; // выполняем действие
+            alert(result); // выводим ответ
+        }else if(x<0 && y<0){ //Проверка что бы все были отрицательные
+            result = x * y; // выполняем действие
+            alert(result); // выводим ответ
+        }else{ // В остальных случаях делаем это
+            result = x + y; // выполняем действие
+            alert(result); // выводим ответ
+        }
+    }
+</script>
+<form action="">
+    <p><input type="button" value="Хитрая считалка" onclick="calc(-5,2)"></p>
+</form>
+<h2>Задание 4</h2>
+<script>
+  function fannyNumber(){
+      var a = +prompt('Введи число в пределах[0..15]\nЧем меньше число тем больше щелкать)))\nОтмена тоже лучше не нажимать!!!'); // получаем число.
+      var b = 0; // переменная для автоматического увеличения числа проверки
+      switch (a){
+          case a = b++: // проверяем равно ли а заданному числу и увеличиваем чго на один для следующего сравнения
+              alert(a+' - Еще осталось нажать '+(16-a)); // показываем числа
+              a++; // если сработал этот кейс то увеличиваем переменную а чтобы в следующих alert отображалось правильное число. Далее все повторяется.
+          case a = b++:
+              alert(a+' - Еще осталось нажать '+(16-a));
+              a++;
+          case a = b++:
+              alert(a+' - Еще осталось нажать '+(16-a));
+              a++;
+          case a = b++:
+              alert(a+' - Еще осталось нажать '+(16-a));
+              a++;
+          case a = b++:
+              alert(a+' - Еще осталось нажать '+(16-a));
+              a++;
+          case a = b++:
+              alert(a+' - Еще осталось нажать '+(16-a));
+              a++;
+          case a = b++:
+              alert(a+' - Еще осталось нажать '+(16-a));
+              a++;
+          case a = b++:
+              alert(a+' - Еще осталось нажать '+(16-a));
+              a++;
+          case a = b++:
+              alert(a+' - Еще осталось нажать '+(16-a));
+              a++;
+          case a = b++:
+              alert(a+' - Еще осталось нажать '+(16-a));
+              a++;
+          case a = b++:
+              alert(a+' - Еще осталось нажать '+(16-a));
+              a++;
+          case a = b++:
+              alert(a+' - Еще осталось нажать '+(16-a));
+              a++;
+          case a = b++:
+              alert(a+' - Еще осталось нажать '+(16-a));
+              a++;
+          case a = b++:
+              alert(a+' - Еще осталось нажать '+(16-a));
+              a++;
+          case a = b++:
+              alert(a+' - Еще осталось нажать '+(16-a));
+              a++;
+          case a = b++:
+              alert(a+' - Еще осталось нажать '+(16-a));
+              a++;
+              break; // когда все числа перебрали выходим что бы не сработал default
+          default: // действие если переменная а не имеет значение в предалах 0..15
+              alert('Что то пошло не так :(')
+      }
+  }
+</script>
+<form action="">
+    <p><input type="button" value="Веселая считалка" onclick="fannyNumber()"></p>
+</form>
+<h2>Задание 5</h2>
+<script>
+    function sum(num1, num2) {
+        return num1+num2;
+    }
+    function mult(num1,num2) {
+        return num1*num2;
+    }
+    function divide(num1,num2) {
+        return num1/num2;
+    }
+    function minus(num1,num2) {
+        return num1-num2;
+    }
+</script>
+<h2>Задание 6</h2>
+<script>
+    function mathOperation(arg1, arg2, operation){
+        switch (operation){ // Получаем действие
+            case 'plus': // если +
+                alert(sum(arg1,arg2)); // используем ранее написанную функцию из 5го задания
+                break; // если угодали заканчиваем программу
+            case 'minus': // если -
+                alert(minus(arg1,arg2));
+                break;
+            case 'div': // если /
+                alert(divide(arg1,arg2));
+                break;
+            case 'mult': // если *
+                alert(mult(arg1,arg2));
+                break;
+        }
+    }
+</script>
+<!-- Ниже делал для саморазвития -->
+
+<form name="calcForm">
+    <p><input type="number" id="num1"></p>
+    <select name="action">
+        <option value="plus">+</option>
+        <option value="minus">-</option>
+        <option value="mult">*</option>
+        <option value="div">/</option>
+    </select>
+    <p><input type="number" id="num2"></p>
+    <p><input type="button" value="Посчитать" onclick="getData()">
+        <input type="button" value="Посчитать 2" onclick="calculator2()"></p>
+</form>
+<script>
+    function calculator2() {
+        var num1 = document.getElementById('num1').value;
+        var num2 = document.getElementById('num2').value;
+        var act = calcForm.action.options[calcForm.action.selectedIndex].value;
+        switch (act){
+            case 'plus':
+                alert(sum(+num1,+num2));
+                break;
+            case 'minus':
+                alert(minus(num1,num2));
+                break;
+            case 'div':
+                alert(divide(num1,num2));
+                break;
+            case 'mult':
+                alert(mult(num1,num2));
+                break;
+        }
+    }
+    function getData() {
+        var num1 = document.getElementById('num1').value;
+        var num2 = document.getElementById('num2').value;
+        var act = calcForm.action.options[calcForm.action.selectedIndex].value;
+        return mathOperation(+num1,+num2,act);
+    }
+</script>
+<h2>Задание 7</h2>
+<script>
+    // alert(null == 0); // false
+    // alert(null === 0); // false
+    // alert(null < 0); // false
+    // alert(null > 0); // false
+    // alert(null >= 0); // true
+</script>
+<p>Прочитал что есть разница в алгоритме работы с null у ">=" Поэтому такой странный результат. Бы ло бы хорошо если на уроке рассказали про это.</p>
+<h2>Задание 8</h2>
+<script>
+    function power(val, pow) {
+        if(pow != 1){ // проверяем что бы степерь не равнялась 1. Если степерь больше 1 то выполняем действие
+            return val * power(val, pow - 1); // число умножаем на функцию в которую передаем число и степерь - 1. Tак как при новом вызове функций степерь больше 1 она снова выполняет условие. Так будет идти пока степень не станет равна 1. После этого условие пропустится.
+        }
+        return val; // Если условие не сработало возвращаем полученый результат
+    }
+    alert(power(2,3));
+</script>
+</body>
+</html>

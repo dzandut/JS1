@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Домашние задание 4</title>
+</head>
+<body>
+<h2>Задание 1</h2>
+<script>
+    function createObject(num) {
+        var obj = {};
+        if (0 < num && num < 1000){
+            obj['Сотни'] = Math.floor(num / 100);
+            obj['десятки'] = Math.floor((num / 10)%10);
+            obj['единицы'] = Math.floor(num % 10);
+            return obj;
+        }else {
+            return 'Число не в диапозоне';
+        }
+    }
+    console.log(createObject(985));
+</script>
+</body>
+</html>

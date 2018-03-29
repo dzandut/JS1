@@ -7,22 +7,16 @@
 <body>
 <h2>Задание 1</h2>
 <script>
-    var x = myObject2(987);
+    var x = myObject(987);
     var res;
     var a;
     var obj = {};
-    var test = {
-      test1: "hi1",
-      test2: "hi2"
-    };
-    function myObject2(num) {
-        // return num;
-        // // var num5 = num;
+    function myObject(num) {
         for (a=1; a<num; a*10){
             res = Math.round((num/a)%10);
             if (a<10){
                 var num1 = res;
-                obj.num11 = num1;
+                return num1;
             }else if (a<100){
                 var num2 = res;
                 return num2;
@@ -33,7 +27,6 @@
         }
 
     }
-    console.log(test);
     console.log(obj);
     console.log(x);
     // function numberControl() {

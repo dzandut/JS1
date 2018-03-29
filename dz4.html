@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Домашние задание 4</title>
+</head>
+<body>
+<script>
+    function makeCounter() {
+        var currentCount = 1;
+
+        return function() { // (**)
+            return currentCount++;
+        };
+    }
+
+    var counter = makeCounter(); // (*)
+
+    // каждый вызов увеличивает счётчик и возвращает результат
+    alert( counter() ); // 1
+    alert( counter() ); // 2
+    alert( counter() ); // 3
+</script>
+</body>
+</html>

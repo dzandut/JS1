@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    // var cTable = document.createElement('table');
+    // var cTr = document.createElement('tr');
+    // // var cTd = document.createElement('td');
+    // document.body.appendChild(cTable);
+    // var table = document.getElementsByTagName('table')[0];
+    // // var tr = document.getElementsByTagName('tr')[0];
+    // // var td = document.getElementsByTagName('td')[0];
+    // for (var a = 1;a <= 8;a++){
+    //     // cTr += cTr;
+    //     cTr = document.createElement('tr');
+    //     console.log(cTr);
+    // }
+    var cTable = document.createElement('table');
+    document.body.appendChild(cTable);
+    for (var a = 1; a < 8; a++) {
+        var cTr = document.createElement('tr');
+        cTable.appendChild(cTr);
+        for (var b = 1; b < 8; b++){
+            var cTd = document.createElement('td');
+            cTr.appendChild(cTd);
+        }
+    }
+
+    // console.log(table);
+
+    // tr.appendChild(cTd);
+</script>
+</body>
+</html>

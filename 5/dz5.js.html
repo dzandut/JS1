@@ -3,9 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        body{
+
+        }
+    </style>
 </head>
 <body>
+<form id="createBoard">
+    <h1>Конструктор шахматной достки</h1>
+    <table border="1" width="300px">
+        <tr>
+            <td>
+                <label for="color">Выбирите цвет Границ</label><br>
+                <input type="color" id="color">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Выбирите рамку<br>
+                <select name="action">
+                    <option value="solid">solid</option>
+                    <option value="double">double</option>
+                    <option value="groove">groove</option>
+                    <option value="ridge">ridge</option>
+                    <option value="inset">inset</option>
+                    <option value="outset">outset</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Выбирите размер рамки<br>
+                <input type="number">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="color2">Выберите цвет достки</label><br>
+                <input type="color" id="color2">
+            </td>
+        </tr>
+    </table>
+</form>
 <script>
+    var borderColor = 'blueviolet';
+    var borderStyle = 'solid';
+    var borderWidth = '3px';
+    var boardColor = 'brown';
+    var cTable = document.createElement('table');
+    document.body.appendChild(cTable);
+    cTable.setAttribute('id','board'); // делает то что хочу но не понимаю почему.
+    cTable.setAttribute('cellspacing','0');
+    for (var a = 1, a1 = 0; a <= 10; a++,a1++) {
+        var cTr = document.createElement('tr');
+        cTable.appendChild(cTr);
+        for (var b = 1, b1 = 0; b <= 10; b++,b1++){
+            var cTd = document.createElement('td');
+            cTr.appendChild(cTd);
+            if (b%2 == 0 && a1%2 != 0) {
+                cTd.setAttribute('style','width: 50px;height: 50px;border: 2px solid '+boardColor+';background-color:'+boardColor+';')
+            }else if (b%2 != 0 && a1%2 == 0) {
+                cTd.setAttribute('style','width: 50px;height: 50px;border: 2px solid '+boardColor+';background-color:'+boardColor+';')
+            }
+
+        }
+        for (var d = 1; d <= 10; d++){
+
+        }
+    }
+    cTable.setAttribute('style','border-style:'+borderStyle+'; border-color:'+borderColor+'; border-width:'+borderWidth+'; margin:auto; text-align:center;');
+    var rowChar = ' ABCDEFGH';
+    var firstTr = cTable.firstElementChild.children;
+    var lastTr = cTable.lastElementChild.children;
+    for (var c = 0; c <= cTable.children.length; c++) {
+        firstTr[c].innerText = rowChar.charAt(c);
+        firstTr[c].setAttribute('style','width: 25px;height: 25px;border-bottom: 2px solid '+boardColor+';');
+        lastTr[c].innerText = rowChar.charAt(c);
+        lastTr[c].setAttribute('style','width: 25px;height: 25px;border-top: 2px solid '+boardColor+';');
+        // console.log(c);
+        for (var f = 0; f < cTable.children.length; f++) {
+                var tTd = cTr.firstElementChild;
+                tTd.innerText = c;
+                // console.log(c);
+            }
+    }
+    console.log(tr)
+    console.log(cTable.firstChild); // Первая строка
+    console.log(cTable.lastChild); // Последняя строка
+    console.log(cTr.lastChild); // Первый столбик
+    console.log(cTr.lastChild); // Второй столбик
+    // for (var f = 0; f < 8; f++) {
+    //     var tTd = cTr.firstChild;
+    //     tTd.innerText = c;
+    //     console.log(c);
+    // }
+    // for (var e in cTr.firstChild){
+    //     console.log(e);
+    // }
     // var cTable = document.createElement('table');
     // var cTr = document.createElement('tr');
     // // var cTd = document.createElement('td');
@@ -18,20 +113,34 @@
     //     cTr = document.createElement('tr');
     //     console.log(cTr);
     // }
-    var cTable = document.createElement('table');
-    document.body.appendChild(cTable);
-    for (var a = 1; a < 8; a++) {
-        var cTr = document.createElement('tr');
-        cTable.appendChild(cTr);
-        for (var b = 1; b < 8; b++){
-            var cTd = document.createElement('td');
-            cTr.appendChild(cTd);
-        }
-    }
-
     // console.log(table);
-
     // tr.appendChild(cTd);
 </script>
+<table>
+    <tr>
+        <td style="width: 50px; height: 50px; border: 3px solid #000000;">1</td>
+        <td style="width: 50px; height: 50px; border: 3px solid #000000;">2</td>
+        <td style="width: 50px; height: 50px; border: 3px solid #000000;"></td>
+        <td style="width: 50px; height: 50px; border: 3px solid #000000;"></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+</table>
 </body>
 </html>

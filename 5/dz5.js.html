@@ -4,9 +4,12 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <style>
-        body{
-
-        }
+        /*#board tr:first-child td:first-child, #board tr:first-child td:last-child{*/
+            /*border-top: none!important;*/
+        /*}*/
+        /*#board tr:last-child td:first-child, #board tr:last-child td:last-child{*/
+            /*border-top: none!important;*/
+        /*}*/
     </style>
 </head>
 <body>
@@ -45,6 +48,7 @@
             </td>
         </tr>
     </table>
+    <p><input type="button" value="Создать шахматную доску" onclick="createBoard()"></p>
 </form>
 <script>
     var borderColor = 'blueviolet';
@@ -52,69 +56,65 @@
     var borderWidth = '3px';
     var boardColor = 'brown';
     var cTable = document.createElement('table');
-    document.body.appendChild(cTable);
-    cTable.setAttribute('id','board'); // делает то что хочу но не понимаю почему.
-    cTable.setAttribute('cellspacing','0');
-    for (var a = 1, a1 = 0; a <= 10; a++,a1++) {
-        var cTr = document.createElement('tr');
-        cTable.appendChild(cTr);
-        for (var b = 1, b1 = 0; b <= 10; b++,b1++){
-            var cTd = document.createElement('td');
-            cTr.appendChild(cTd);
-            if (b%2 == 0 && a1%2 != 0) {
-                cTd.setAttribute('style','width: 50px;height: 50px;border: 2px solid '+boardColor+';background-color:'+boardColor+';')
-            }else if (b%2 != 0 && a1%2 == 0) {
-                cTd.setAttribute('style','width: 50px;height: 50px;border: 2px solid '+boardColor+';background-color:'+boardColor+';')
-            }
+    var table = [];
 
-        }
-        for (var d = 1; d <= 10; d++){
+    function createBoard() {
+        document.body.appendChild(cTable);
+        cTable.id = 'board'; // делает то что хочу но не понимаю почему.
+        cTable.setAttribute('cellspacing','0');
+        for (var a = 1, a1 = 0; a <= 10; a++,a1++) {
+            var cTr = document.createElement('tr');
+            cTable.appendChild(cTr);
+            for (var b = 1, b1 = 0; b <= 10; b++,b1++){
+                var cTd = document.createElement('td');
+                cTr.appendChild(cTd);
+                table.push(cTd);
+                if (b%2 == 0 && a1%2 != 0) {
+                    cTd.setAttribute('style','width: 50px;height: 50px;border: 2px solid '+boardColor+';background-color:'+boardColor+';')
+                }else if (b%2 != 0 && a1%2 == 0) {
+                    cTd.setAttribute('style','width: 50px;height: 50px;border: 2px solid '+boardColor+';background-color:'+boardColor+';')
+                }
 
-        }
-    }
-    cTable.setAttribute('style','border-style:'+borderStyle+'; border-color:'+borderColor+'; border-width:'+borderWidth+'; margin:auto; text-align:center;');
-    var rowChar = ' ABCDEFGH';
-    var firstTr = cTable.firstElementChild.children;
-    var lastTr = cTable.lastElementChild.children;
-    for (var c = 0; c <= cTable.children.length; c++) {
-        firstTr[c].innerText = rowChar.charAt(c);
-        firstTr[c].setAttribute('style','width: 25px;height: 25px;border-bottom: 2px solid '+boardColor+';');
-        lastTr[c].innerText = rowChar.charAt(c);
-        lastTr[c].setAttribute('style','width: 25px;height: 25px;border-top: 2px solid '+boardColor+';');
-        // console.log(c);
-        for (var f = 0; f < cTable.children.length; f++) {
-                var tTd = cTr.firstElementChild;
-                tTd.innerText = c;
-                // console.log(c);
             }
+        }
+
+        cTable.setAttribute('style','border-style:'+borderStyle+'; border-color:'+borderColor+'; border-width:'+borderWidth+'; margin:auto; text-align:center;');
+        var rowChar = ' ABCDEFGH';
+        var firstTr = cTable.firstElementChild.children;;
+        var lastTr = cTable.lastElementChild.children;
+        for (var c = 0; c < cTable.childNodes.length; c++) {
+            firstTr[c].innerText = rowChar.charAt(c);
+            firstTr[c].setAttribute('style','width: 25px;height: 25px;transform: rotate(180deg);border-top: 2px solid '+boardColor+';');
+            lastTr[c].innerText = rowChar.charAt(c);
+            lastTr[c].setAttribute('style','width: 25px;height: 25px;border-top: 2px solid '+boardColor+';');
+            // console.log(c);
+            for (var f = 1; f <= 8; f++) {
+                var fTd = cTable.childNodes[f].firstChild;
+                fTd.innerText = f;
+                fTd.setAttribute('style','width: 25px;height: 25px;border-right: 2px solid '+boardColor+';');
+                var lTd = cTable.childNodes[f].lastChild;
+                lTd.innerText = f;
+                lTd.setAttribute('style','width: 25px;height: 25px;transform: rotate(180deg);border-right: 2px solid '+boardColor+';')
+            }
+        }
+        cTable.rows[0].cells[0].setAttribute('style','width: 25px;height: 25px;transform: rotate(180deg);');
+        cTable.rows[0].cells[cTable.rows[0].cells.length - 1].setAttribute('style','width: 25px;height: 25px;transform: rotate(180deg);');
+        cTable.rows[cTable.rows.length - 1].cells[0].setAttribute('style','width: 25px;height: 25px;transform: rotate(180deg);');
+        cTable.rows[cTable.rows.length - 1].cells[cTable.rows[cTable.rows.length - 1].cells.length - 1].setAttribute('style','width: 25px;height: 25px;transform: rotate(180deg);');
     }
-    console.log(tr)
-    console.log(cTable.firstChild); // Первая строка
-    console.log(cTable.lastChild); // Последняя строка
-    console.log(cTr.lastChild); // Первый столбик
-    console.log(cTr.lastChild); // Второй столбик
-    // for (var f = 0; f < 8; f++) {
-    //     var tTd = cTr.firstChild;
-    //     tTd.innerText = c;
-    //     console.log(c);
-    // }
-    // for (var e in cTr.firstChild){
-    //     console.log(e);
-    // }
-    // var cTable = document.createElement('table');
-    // var cTr = document.createElement('tr');
-    // // var cTd = document.createElement('td');
-    // document.body.appendChild(cTable);
-    // var table = document.getElementsByTagName('table')[0];
-    // // var tr = document.getElementsByTagName('tr')[0];
-    // // var td = document.getElementsByTagName('td')[0];
-    // for (var a = 1;a <= 8;a++){
-    //     // cTr += cTr;
-    //     cTr = document.createElement('tr');
-    //     console.log(cTr);
-    // }
-    // console.log(table);
-    // tr.appendChild(cTd);
+    function white() {
+        
+    }
+    function black() {
+        
+    }
+    // console.log(cTable.cells[1]);
+    // console.log(cTable.rows[0].cells[0]);
+    // console.log(cTable.childNodes);
+    // console.log(firstTr); // Первый столбик
+    // console.log(lastTr); // Второй столбик
+    // console.log(lastTr[1]); // Второй столбик
+    // console.log(table); // Второй столбик
 </script>
 <table>
     <tr>

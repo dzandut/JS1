@@ -10,10 +10,18 @@
         /*#board tr:last-child td:first-child, #board tr:last-child td:last-child{*/
             /*border-top: none!important;*/
         /*}*/
+        .white{
+            color: burlywood;
+            font-size: 37px;
+        }
+        .black{
+            color: darkslategray;
+            font-size: 37px;
+        }
     </style>
 </head>
 <body>
-<form id="createBoard">
+<form id="createBoardForm">
     <h1>Конструктор шахматной достки</h1>
     <table border="1" width="300px">
         <tr>
@@ -38,7 +46,7 @@
         <tr>
             <td>
                 Выбирите размер рамки<br>
-                <input type="number">
+                <input type="number" id="number">
             </td>
         </tr>
         <tr>
@@ -50,15 +58,19 @@
     </table>
     <p><input type="button" value="Создать шахматную доску" onclick="createBoard()"></p>
 </form>
+<form id="chessForm" style="display: none;">
+    <input type="radio" name="chesscolor" value="white">Белые
+    <input type="radio" name="chesscolor" value="white">Черные
+    <p><input type="button" value="Расставить фигуры" onclick="createChess()"></p>
+</form>
 <script>
-    var borderColor = 'blueviolet';
-    var borderStyle = 'solid';
-    var borderWidth = '3px';
-    var boardColor = 'brown';
     var cTable = document.createElement('table');
     var table = [];
-
     function createBoard() {
+        var borderColor = document.getElementById('color').value;
+        var borderStyle = createBoardForm.action.options[createBoardForm.action.selectedIndex].value;
+        var borderWidth = document.getElementById('number').value+'3px';
+        var boardColor = document.getElementById('color2').value;
         document.body.appendChild(cTable);
         cTable.id = 'board'; // делает то что хочу но не понимаю почему.
         cTable.setAttribute('cellspacing','0');
@@ -101,46 +113,62 @@
         cTable.rows[0].cells[cTable.rows[0].cells.length - 1].setAttribute('style','width: 25px;height: 25px;transform: rotate(180deg);');
         cTable.rows[cTable.rows.length - 1].cells[0].setAttribute('style','width: 25px;height: 25px;transform: rotate(180deg);');
         cTable.rows[cTable.rows.length - 1].cells[cTable.rows[cTable.rows.length - 1].cells.length - 1].setAttribute('style','width: 25px;height: 25px;transform: rotate(180deg);');
+        document.forms[0].setAttribute('style','display:none;');
+        document.forms[1].setAttribute('style','display:block;');
     }
-    function white() {
-        
+
+    var chessObj = {
+        pawns: '&#9823',
+        rook: '&#9820;',
+        knight: '&#9822;',
+        bishop: '&#9821;',
+        queen: '&#9819;',
+        king: '&#9818;'
+    };
+    function createChess() {
+        var chess = (document.getElementsByName('chesscolor')[0].checked)?true:false;
+        if (chess == 1) {
+            player('white');
+            ai('black');
+        }else{
+            player('black');
+            ai('white');
+        }
     }
-    function black() {
-        
+    function player(chessColor) {
+        for (var d1 = 71; d1 < 79; d1++){
+            table[d1].innerHTML = chessObj.pawns;
+            table[d1].className = chessColor;
+        }
+        for (var d2 = 81; d2 < 89; d2++){
+            table[d2].className = chessColor;
+        }
+        table[81].innerHTML = chessObj.rook;
+        table[88].innerHTML = chessObj.rook;
+        table[82].innerHTML = chessObj.knight;
+        table[87].innerHTML = chessObj.knight;
+        table[83].innerHTML = chessObj.bishop;
+        table[86].innerHTML = chessObj.bishop;
+        table[84].innerHTML = chessObj.queen;
+        table[85].innerHTML = chessObj.king;
     }
-    // console.log(cTable.cells[1]);
-    // console.log(cTable.rows[0].cells[0]);
-    // console.log(cTable.childNodes);
-    // console.log(firstTr); // Первый столбик
-    // console.log(lastTr); // Второй столбик
-    // console.log(lastTr[1]); // Второй столбик
-    // console.log(table); // Второй столбик
+    function ai(chessColor) {
+        for (var d3 = 21; d3 < 29; d3++){
+            table[d3].innerHTML = chessObj.pawns;
+            table[d3].className = chessColor;
+        }
+        for (var d4 = 11; d4 < 19; d4++){
+            table[d4].className = chessColor;
+        }
+        table[11].innerHTML = chessObj.rook;
+        table[18].innerHTML = chessObj.rook;
+        table[12].innerHTML = chessObj.knight;
+        table[17].innerHTML = chessObj.knight;
+        table[13].innerHTML = chessObj.bishop;
+        table[16].innerHTML = chessObj.bishop;
+        table[15].innerHTML = chessObj.queen;
+        table[14].innerHTML = chessObj.king;
+    }
 </script>
-<table>
-    <tr>
-        <td style="width: 50px; height: 50px; border: 3px solid #000000;">1</td>
-        <td style="width: 50px; height: 50px; border: 3px solid #000000;">2</td>
-        <td style="width: 50px; height: 50px; border: 3px solid #000000;"></td>
-        <td style="width: 50px; height: 50px; border: 3px solid #000000;"></td>
-    </tr>
-    <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-</table>
 </body>
 </html>

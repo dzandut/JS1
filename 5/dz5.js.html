@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Доска на JS</title>
     <style>
         /*#board tr:first-child td:first-child, #board tr:first-child td:last-child{*/
             /*border-top: none!important;*/
@@ -64,23 +64,30 @@
     <p><input type="button" value="Расставить фигуры" onclick="createChess()"></p>
 </form>
 <script>
+    /*
+     Скрипт создания шахматной доски и расположеня на ней фигур
+     Посторался максимум сделать на JS без использования css и html
+    */
     var cTable = document.createElement('table');
     var table = [];
+    /*
+    Функция создания доски
+     */
     function createBoard() {
         var borderColor = document.getElementById('color').value;
         var borderStyle = createBoardForm.action.options[createBoardForm.action.selectedIndex].value;
         var borderWidth = document.getElementById('number').value+'3px';
         var boardColor = document.getElementById('color2').value;
         document.body.appendChild(cTable);
-        cTable.id = 'board'; // делает то что хочу но не понимаю почему.
+        cTable.id = 'board';
         cTable.setAttribute('cellspacing','0');
-        for (var a = 1, a1 = 0; a <= 10; a++,a1++) {
+        for (var a = 1, a1 = 0; a <= 10; a++,a1++) { // создает строки
             var cTr = document.createElement('tr');
             cTable.appendChild(cTr);
-            for (var b = 1, b1 = 0; b <= 10; b++,b1++){
+            for (var b = 1, b1 = 0; b <= 10; b++,b1++){ // создает ячейки
                 var cTd = document.createElement('td');
                 cTr.appendChild(cTd);
-                table.push(cTd);
+                table.push(cTd); // добавляем в мосив что бы удобней было обращатся к нужной ячейке.
                 if (b%2 == 0 && a1%2 != 0) {
                     cTd.setAttribute('style','width: 50px;height: 50px;border: 2px solid '+boardColor+';background-color:'+boardColor+';')
                 }else if (b%2 != 0 && a1%2 == 0) {
@@ -89,7 +96,9 @@
 
             }
         }
-
+        /*
+        Добавляет буквы и цифры на доску
+        */
         cTable.setAttribute('style','border-style:'+borderStyle+'; border-color:'+borderColor+'; border-width:'+borderWidth+'; margin:auto; text-align:center;');
         var rowChar = ' ABCDEFGH';
         var firstTr = cTable.firstElementChild.children;;
@@ -99,7 +108,6 @@
             firstTr[c].setAttribute('style','width: 25px;height: 25px;transform: rotate(180deg);border-top: 2px solid '+boardColor+';');
             lastTr[c].innerText = rowChar.charAt(c);
             lastTr[c].setAttribute('style','width: 25px;height: 25px;border-top: 2px solid '+boardColor+';');
-            // console.log(c);
             for (var f = 1; f <= 8; f++) {
                 var fTd = cTable.childNodes[f].firstChild;
                 fTd.innerText = f;
@@ -109,14 +117,22 @@
                 lTd.setAttribute('style','width: 25px;height: 25px;transform: rotate(180deg);border-right: 2px solid '+boardColor+';')
             }
         }
+        /*
+        убирает границы по краям
+         */
         cTable.rows[0].cells[0].setAttribute('style','width: 25px;height: 25px;transform: rotate(180deg);');
         cTable.rows[0].cells[cTable.rows[0].cells.length - 1].setAttribute('style','width: 25px;height: 25px;transform: rotate(180deg);');
         cTable.rows[cTable.rows.length - 1].cells[0].setAttribute('style','width: 25px;height: 25px;transform: rotate(180deg);');
         cTable.rows[cTable.rows.length - 1].cells[cTable.rows[cTable.rows.length - 1].cells.length - 1].setAttribute('style','width: 25px;height: 25px;transform: rotate(180deg);');
+        /*
+        Прячем конструктор доски и показываем выбор цыета фигур
+         */
         document.forms[0].setAttribute('style','display:none;');
         document.forms[1].setAttribute('style','display:block;');
     }
-
+    /*
+    Расставляем фигуры на шахматной доске.
+     */
     var chessObj = {
         pawns: '&#9823',
         rook: '&#9820;',
@@ -125,6 +141,7 @@
         queen: '&#9819;',
         king: '&#9818;'
     };
+
     function createChess() {
         var chess = (document.getElementsByName('chesscolor')[0].checked)?true:false;
         if (chess == 1) {
@@ -135,6 +152,7 @@
             ai('white');
         }
     }
+
     function player(chessColor) {
         for (var d1 = 71; d1 < 79; d1++){
             table[d1].innerHTML = chessObj.pawns;
@@ -152,6 +170,7 @@
         table[84].innerHTML = chessObj.queen;
         table[85].innerHTML = chessObj.king;
     }
+
     function ai(chessColor) {
         for (var d3 = 21; d3 < 29; d3++){
             table[d3].innerHTML = chessObj.pawns;

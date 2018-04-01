@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Доска на JS</title>
+    <title>Шахматная Доска на JS</title>
     <style>
         /*#board tr:first-child td:first-child, #board tr:first-child td:last-child{*/
             /*border-top: none!important;*/
@@ -70,6 +70,7 @@
     */
     var cTable = document.createElement('table');
     var table = [];
+
     /*
     Функция создания доски
      */
@@ -96,6 +97,7 @@
 
             }
         }
+
         /*
         Добавляет буквы и цифры на доску
         */
@@ -117,6 +119,7 @@
                 lTd.setAttribute('style','width: 25px;height: 25px;transform: rotate(180deg);border-right: 2px solid '+boardColor+';')
             }
         }
+
         /*
         убирает границы по краям
          */
@@ -124,6 +127,7 @@
         cTable.rows[0].cells[cTable.rows[0].cells.length - 1].setAttribute('style','width: 25px;height: 25px;transform: rotate(180deg);');
         cTable.rows[cTable.rows.length - 1].cells[0].setAttribute('style','width: 25px;height: 25px;transform: rotate(180deg);');
         cTable.rows[cTable.rows.length - 1].cells[cTable.rows[cTable.rows.length - 1].cells.length - 1].setAttribute('style','width: 25px;height: 25px;transform: rotate(180deg);');
+
         /*
         Прячем конструктор доски и показываем выбор цыета фигур
          */
@@ -142,6 +146,9 @@
         king: '&#9818;'
     };
 
+    /*
+    Выбор цвета для фигур игрока
+     */
     function createChess() {
         var chess = (document.getElementsByName('chesscolor')[0].checked)?true:false;
         if (chess == 1) {
@@ -153,6 +160,9 @@
         }
     }
 
+    /*
+    Расстановка фигур игрока
+     */
     function player(chessColor) {
         for (var d1 = 71; d1 < 79; d1++){
             table[d1].innerHTML = chessObj.pawns;
@@ -171,6 +181,9 @@
         table[85].innerHTML = chessObj.king;
     }
 
+    /*
+    Расстановка фигур противника
+     */
     function ai(chessColor) {
         for (var d3 = 21; d3 < 29; d3++){
             table[d3].innerHTML = chessObj.pawns;

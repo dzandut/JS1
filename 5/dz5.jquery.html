@@ -2,10 +2,211 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Шахматная Доска на jquery</title>
+    <script src="jquery-3.2.1.min.js"></script>
+    <style>
+
+        .white{
+            color: burlywood;
+            font-size: 37px;
+        }
+        .black{
+            color: darkslategray;
+            font-size: 37px;
+        }
+        .cell{
+            width: 50px;
+            height: 50px;
+            font-size: 37px;
+        }
+        #chessBoard{
+            margin: auto;
+            /*border: 3px black solid;*/
+            /*background-color: black;*/
+        }
+        #chessBoard td{
+            text-align: center;
+        }
+        #chessBoard tr:nth-child(even) td:nth-child(even){
+            background-color: black;
+        }
+        #chessBoard tr:nth-child(odd) td:nth-child(odd){
+            background-color: black;
+        }
+        .cellout{
+            width: 25px;
+            height: 25px;
+            background-color: #fff!important;
+            font-size: 20px;
+        }
+        .rotate{
+            transform: rotate(180deg);
+        }
+        .hide{
+            display: none;
+        }
+    </style>
 </head>
 <body>
--1
+<form id="createBoardForm">
+    <h1>Конструктор шахматной достки</h1>
+    <table border="1" width="300px">
+        <tr>
+            <td>
+                <label for="color">Выбирите цвет Границ</label><br>
+                <input type="color" id="color">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Выбирите рамку<br>
+                <select name="action">
+                    <option value="solid">solid</option>
+                    <option value="double">double</option>
+                    <option value="groove">groove</option>
+                    <option value="ridge">ridge</option>
+                    <option value="inset">inset</option>
+                    <option value="outset">outset</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Выбирите размер рамки<br>
+                <input type="number" id="number">
+            </td>
+        </tr>
+    </table>
+    <p><input type="button" value="Создать шахматную доску" onclick="createBoard()"></p>
+</form>
+<form id="chessForm" class="hide">
+    <input type="radio" name="chesscolor" value="white">Белые
+    <input type="radio" name="chesscolor" value="white">Черные
+    <p><input type="button" value="Расставить фигуры" onclick="createChess()"></p>
+</form>
+<script>
+    var boardArr;
+    /*
+    Функыия создания шахматной доски
+     */
+    function createBoard() {
+        var borderColor = document.getElementById('color').value;
+        var borderStyle = createBoardForm.action.options[createBoardForm.action.selectedIndex].value;
+        var borderWidth = document.getElementById('number').value+'3px';
 
+        /*
+        Создаем таблицу
+         */
+        $('body').append('<table id="chessBoard" cellspacing="0"></table>');
+        var table = $('#chessBoard');
+        table.css({
+            "border-color": borderColor,
+            "border-style": borderStyle,
+            "border-width": borderWidth
+        });
+        for (var a = 0; a < 10; a++) {
+            table.append('<tr></tr>');
+        }
+        var row = $('#chessBoard tr');
+        for (var a1 = 0; a1 < 10; a1++) {
+            row.append('<td class="cell"></td>');
+        }
+        var cell = $('.cell');
+        cell.css("border", "solid 2px");
+
+        var firstRow = $('#chessBoard :first-child td');
+        var lastRow = $('#chessBoard :last-child td');
+        var firstCellInRow = $('#chessBoard tr :first-child');
+        var lastCellInRow = $('#chessBoard tr :last-child');
+
+        /*
+        Оформляем крайние ячейки
+         */
+        firstRow.addClass('cellout rotate');
+        lastRow.addClass('cellout');
+        firstCellInRow.addClass('cellout');
+        lastCellInRow.addClass('cellout rotate');
+
+        /*
+        Добовляем символы на доску
+         */
+        var rowChar = ' ABCDEFGH';
+        for (var b = 1; b < 9; b++) {
+            $(firstRow[b]).text(rowChar.charAt(b));
+            $(lastRow[b]).text(rowChar.charAt(b));
+            $(firstCellInRow[b]).text(b);
+            $(lastCellInRow[b]).text(b);
+        }
+        $('#createBoardForm').toggleClass('hide');
+        $('#chessForm').toggleClass('hide');
+        boardArr = $('td');
+    }
+
+
+    /*
+    Функция расстановки фигур
+     */
+    var chessArr = [
+        '&#9823',
+        '&#9820;',
+        '&#9822;',
+        '&#9821;',
+        '&#9819;',
+        '&#9818;'
+    ];
+
+    function createChess() {
+        var chess = (document.getElementsByName('chesscolor')[0].checked)?true:false;
+        if (chess == 1) {
+            player('white');
+            ai('black');
+        }else{
+            player('black');
+            ai('white');
+        }
+    }
+    function player(chessColor) {
+        $('#chessBoard tr:nth-child(8) td')
+            .not('td:first-child')
+            .not('td:last-child')
+            .html(chessArr[0])
+            .addClass(chessColor);
+
+        $('#chessBoard tr:nth-child(9) td')
+            .not('td:first-child')
+            .not('td:last-child')
+            .addClass(chessColor);
+
+        $(boardArr[84]).html(chessArr[1]);
+        $(boardArr[91]).html(chessArr[1]);
+        $(boardArr[85]).html(chessArr[2]);
+        $(boardArr[90]).html(chessArr[2]);
+        $(boardArr[86]).html(chessArr[3]);
+        $(boardArr[89]).html(chessArr[3]);
+        $(boardArr[87]).html(chessArr[4]);
+        $(boardArr[88]).html(chessArr[5]);
+    }
+    function ai(chessColor) {
+        $('#chessBoard tr:nth-child(3) td')
+            .not('td:first-child')
+            .not('td:last-child')
+            .html('&#9823')
+            .addClass(chessColor);
+
+        $('#chessBoard tr:nth-child(2) td')
+            .not('td:first-child')
+            .not('td:last-child')
+            .addClass(chessColor);
+
+        $(boardArr[14]).html(chessArr[1]);
+        $(boardArr[21]).html(chessArr[1]);
+        $(boardArr[15]).html(chessArr[2]);
+        $(boardArr[20]).html(chessArr[2]);
+        $(boardArr[16]).html(chessArr[3]);
+        $(boardArr[19]).html(chessArr[3]);
+        $(boardArr[17]).html(chessArr[4]);
+        $(boardArr[18]).html(chessArr[5]);
+    }
+</script>
 </body>
 </html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Распродажа немецких внедорожников)))</title>
+    <link type="text/css" rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Выбери свой внедорожник!</h1>
+    <div id="small-cart">
+        <img src="img/icon.png">
+    </div>
+    <div id="products">
+        <div>
+            <h3>Q7</h3>
+            <figure>
+                <p>
+                    <img src="img/audi.jpg" alt="">
+                </p>
+                <figcaption><button id="Q7">Добавить в корзину</button><span>69999</span></figcaption>
+            </figure>
+        </div>
+        <div>
+            <h3>GLS</h3>
+            <figure>
+                <p>
+                    <img src="img/mercedes.jpg" alt="">
+                </p>
+                <figcaption><button id="GLS">Добавить в корзину</button><span>79999</span></figcaption>
+            </figure>
+        </div>
+        <div>
+            <h3>X5</h3>
+            <figure>
+                <p>
+                    <img src="img/bmw.jpg" alt="">
+                </p>
+                <figcaption><button id="X5">Добавить в корзину</button><span>89999</span></figcaption>
+            </figure>
+        </div>
+        <div>
+            <h3>Touareg</h3>
+            <figure>
+                <p>
+                    <img src="img/vw.jpeg" alt="">
+                </p>
+                <figcaption><button id="Touareg">Добавить в корзину</button><span>99999</span></figcaption>
+            </figure>
+        </div>
+    </div>
+    <hr>
+    <table>
+        <tbody id="big-cart">
+        <tr>
+            <td class="cell1">Товар</td>
+            <td class="cell2">Количество</td>
+            <td class="cell3">Цена</td>
+        </tr>
+        </tbody>
+    </table>
+<script>
+    // Делаем колекцию товаров на странице
+    var products = document.getElementsByTagName('button');
+    // Добавляем слушание событий для все товаров
+    for (var i = 0; i < products.length; i++) {
+        products[i].addEventListener('click', toCart);
+    }
+    var countProduct = [];
+    // Добавляем товар в корзину
+    function toCart(product) {
+        var z = event.target.id;
+        var z1 = countProduct.find(myFind);
+        function myFind() {
+            return z;
+        }
+        // смотрим если товар в корзине
+        if (z1 == z){ // если есть то увеличиваем количество на 1
+            var z2 = document.getElementsByName(z);
+
+            console.log(z2);
+        }else{ // если нет создаем строку с товаром
+            countProduct.push(z);
+            return cartTable(z, getPrice(z));
+        }
+        console.log(z);
+        console.log(z1);
+        console.log(countProduct);
+
+        // console.log(event);
+    }
+    // Создаем и наполняем таблицу
+    function cartTable(productName, productPrice) {
+        var arr = [productName,'', productPrice];
+
+        var table = document.getElementById('big-cart');
+        var row = document.createElement('tr');
+        var row2 = table.appendChild(row);
+        row2;
+        for (var y = 0; y <3; y++) {
+            var cell = document.createElement('td');
+            row2.appendChild(cell).textContent = arr[y];
+        }
+        var cell2 = row2.firstChild;
+        cell2.setAttribute('name', productName);
+        console.log(arr[2]);
+        console.log(cell2);
+    }
+    // Узнаем цену товара
+    function getPrice(idProduct) {
+         var x = document.getElementById(idProduct);
+         x = +x.nextSibling.childNodes[0].substringData(0, 10); // надо сделать через число.length
+        return x;
+    }
+    // Вычисляем общую стоймость корзины
+    function Sum() {
+
+    }
+    // Если товар выбран больше одного раза
+    function manyProducts(){
+        // var
+    }
+    console.log(manyProducts());
+    console.log(products);
+    console.log(getPrice('X5'));
+    console.log(products[0].nextSibling.firstChild);
+</script>
+</body>
+</html>

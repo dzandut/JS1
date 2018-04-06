@@ -1,0 +1,69 @@
+#big{
+    width: 900px;
+    margin: auto;
+}
+#big_picture img{
+    max-width: 900px;
+}
+#gallery{
+    display: flex;
+    justify-content: space-between;
+}
+#nav{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: nowrap;
+    font-size: 50px;
+}
+/* Второе задание */
+body{
+    width: 900px;
+    margin: auto;
+}
+h1, h3{
+    margin: auto;
+    text-align: center;
+}
+#products{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+
+}
+#products div{
+    width: 50%;
+}
+img{
+    width: 400px;
+}
+figcaption{
+    display: flex;
+    justify-content: space-between;
+}
+figcaption span:first-child{
+    cursor: pointer;
+}
+#small-cart{
+    display: flex;
+    justify-content: flex-end;
+}
+#small-cart img{
+    width: 50px;
+    height: 50px;
+}
+table{
+    width: 100%;
+}
+td{
+    /*border-bottom: 2px solid #000;*/
+}
+td:first-child{
+    width: 50%;
+}
+td:nth-child(2){
+    text-align: right;
+}
+td:last-child{
+    width: 25%;
+    text-align: right;
+}

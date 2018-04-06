@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link type="text/css" rel="stylesheet" href="style.css">
+    <style>
+
+    </style>
+    <script>
+        function init (){
+            var images = document . getElementsByTagName ( "img" );
+            for ( var i = 0 ; i < images . length ; i ++) {
+                images [ i ]. onclick = changeBigPicture;
+            }
+        }
+        function changeBigPicture ( eventObj ){
+            var appDiv = document . getElementById ( "big_picture" );
+            appDiv . innerHTML = "";
+            var eventElement = eventObj . target;
+            var imageNameParts = eventElement . id . split ( "_" );
+            var src = "img/" + imageNameParts [ 1 ] + ".jpg";
+            var imageDomElement = document . createElement ( "img" );
+            imageDomElement . src = src;
+            imageDomElement.onerror = function () { alert('Изображение куда то пропало:(')};
+            appDiv . appendChild ( imageDomElement );
+        }
+        window . onload = init;
+
+    </script>
+</head>
+<body>
+<div id="big">
+<div id = "big_picture" ></div>
+<div id = "gallery">
+    <img id = "image_1" src = "img/AQ7small_1.jpg">
+    <img id = "image_2" src = "img/AQ7small_2.jpg">
+    <img id = "image_3" src = "img/AQ7small_3.jpg">
+    <img id = "image_4" src = "img/AQ7small_4.jpg">
+    <img id = "image_5" src = "img/AQ7small_5.jpg">
+</div>
+    <div id="nav">
+        <p id="rew">Назад</p>
+        <p id="for">Вперед</p>
+    </div>
+</div>
+<script>
+    var gallery = document.getElementById('gallery');
+
+</script>
+</body>
+</html>
